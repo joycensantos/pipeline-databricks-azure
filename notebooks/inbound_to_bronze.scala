@@ -1,6 +1,16 @@
 // Databricks notebook source
+// MAGIC %md
+// MAGIC ## Verificando acesso a pasta
+
+// COMMAND ----------
+
 // MAGIC %python
 // MAGIC dbutils.fs.ls("/mnt/dados/inbound")
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC ## Lendo da Pasta
 
 // COMMAND ----------
 
@@ -13,7 +23,8 @@ display(dados)
 
 // COMMAND ----------
 
-
+// MAGIC %md
+// MAGIC ## Dropando as colunas conforme solicitado
 
 // COMMAND ----------
 
@@ -22,7 +33,13 @@ display(dados_anuncio)
 
 // COMMAND ----------
 
+// MAGIC %md
+// MAGIC ## Criando nova coluna com o conteúdo do campo id
 
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC ##### import da functions para utilizar withColumn
 
 // COMMAND ----------
 
@@ -35,12 +52,18 @@ display(df_bronze)
 
 // COMMAND ----------
 
-
+// MAGIC %md
+// MAGIC ## Salvando as alterações na camada bronze em arquivo tipo delta
 
 // COMMAND ----------
 
 val path = "dbfs:/mnt/dados/bronze/dataset_imoveis"
 df_bronze.write.format("delta").mode(SaveMode.Overwrite).save(path)
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC ## Validando se foi salvo com êxito
 
 // COMMAND ----------
 
